@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="container">
+        <h2>Student Dashboard - Hi, {{ user.first_name }} {{ user.last_name }} </h2>
+        <br>
+        <a href="{% url 'classroom:classroom_list_student' %}">
+            <button class="btn btn-primary">View All Classrooms</button>
+        </a>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+<h2>Assignment: {{ object.assignment_heading }}</h2>
+<br><br>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th>Name</th>
+        <th>Submission</th>
+    </thead>
+    {% load submitted_assignment_answers_templatetags %}
+    {% for answers in object|filter_submitted_assignment_answers %}
+    <tr>
+        <td>{{ answers.student }}</td>
+        <td><a href="{{ answers.assignment_answer.url }}">View</a></td>
+    </tr>
+    {% empty %}
+    <tr><td>No Submissions yet</td></tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<h1>Course: {{ object.course }}</h1>
+    <div class="container">
+        <p>Room No: {{ object.room_no }}</p>
+        <p>Joining Link:  http://127.0.0.1:8000/classroom/student/join_class/{{ object.code }}/{{ object.id }}/</p>
+    </div>
+    <a href="{% url 'classroom:classroom_edit' classroom.code classroom.id %}">
+        <button class="btn btn-dark">EDIT</button>
+    </a>
+    <a href="{% url 'classroom:classroom_delete' classroom.code classroom.id %}">
+        <button class="btn btn-danger">DELETE CLASSROOM</button>
+    </a>
+    <br>
+    <br>
+
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                List of Students Enrolled
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </thead>
+                    {% for student in object.student.all %}
+                    <tr>
+                        <td>{{ student.user.first_name }}</td>
+                        <td>{{ student.user.last_name }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No Enrolled Students</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+          </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Notes
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                {% load notes_templatetags %}
+                  <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th>Notes</th>
+                        <th>Link</th>
+                    </thead>
+                    {% for notes in object|filter_notes_items %}
+                    <tr>
+                        <td>{{ notes.notes_heading }}</td>
+                        <td><a href="{{ notes.notes_file.url }}">View</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No uploaded notes yet.</td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Assignments
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body">
+                {% load assignment_templatetags %}
+                  <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th>Assignment</th>
+                        <th>Deadline</th>
+                        <th>Submission Count</th>
+                        <th>View Submissions</th>
+                    </thead>
+                    {% for assignment in object|filter_assignment_items %}
+                    <tr>
+                        <td><a href="{{ assignment.assignment_question.url }}">{{ assignment.assignment_heading }}</a></td>
+                        <td>{{ assignment.deadline }}</td>
+                        {% load assignment_answer_number_templatetags %}
+                        <td>{{ assignment|filter_assignment_answer_number_items }}</td>
+                        <td><a href="{% url 'classroom:assignment_submissions' assignment.id %}">View</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No uploaded assignments yet.</td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

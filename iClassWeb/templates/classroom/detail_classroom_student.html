@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1>Course: {{ object.course }}</h1>
+    <div class="container">
+        <p>Room No: {{ object.room_no }}</p>
+        <p>Teacher: {{ object.teacher }}</p>
+    </div>
+    <br>
+    <br>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Notes
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                {% load notes_templatetags %}
+                  <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th>Notes</th>
+                        <th>Link</th>
+                    </thead>
+                    {% for notes in object|filter_notes_items %}
+                    <tr>
+                        <td>{{ notes.notes_heading }}</td>
+                        <td><a href="{{ notes.notes_file.url }}">View</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No uploaded notes yet.</td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+            </div>
+          </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                  Assignments
+                </button>
+              </h2>
+            </div>
+        
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                {% load assignment_templatetags %}
+                <table class="table table-striped">
+                  <thead class="thead-dark">
+                      <th>Assignment</th>
+                      <th>Deadline</th>
+                      <th>Submit</th>
+                      <th>Submission</th>
+                  </thead>
+                  {% for assignment in object|filter_assignment_items %}
+                  <tr>
+                      <td><a href="{{ assignment.assignment_question.url }}">{{ assignment.assignment_heading }}</a></td>
+                      <td>{{ assignment.deadline }}</td>
+                      <td><a href="{% url 'classroom:upload_assignment_answer' assignment.id %}">Upload</a></td>
+                      {% load assignment_answer_templatetags %}
+                      {% for answer in assignment|filter_assignment_answer_items:request.user.id %}
+                        <td><a href="{{ answer.assignment_answer.url }}">View Submission</a></td>
+                      {% empty %}
+                        <td>No Submission By You Yet.</td>
+                      {% endfor %}
+                  </tr>
+                  {% empty %}
+                  <tr>
+                      <td>No uploaded assignments yet.</td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %} 

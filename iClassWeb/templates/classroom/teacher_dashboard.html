@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+ 
+{% block body %}
+    <div class="container">
+        <h2>Teacher Dashboard - Hi, {{ user.first_name }} {{ user.last_name }} </h2>
+        <br>
+        <a href="{% url 'classroom:create_classroom' %}">
+            <button class="btn btn-primary">Create Classroom</button>
+        </a>
+        <a href="{% url 'classroom:classroom_list' %}">
+            <button class="btn btn-primary">View All Classrooms</button>
+        </a>
+        <a href="{% url 'classroom:upload_notes' %}">
+            <button class="btn btn-primary">Upload Notes</button>
+        </a>
+        <a href="{% url 'classroom:upload_assignment' %}">
+            <button class="btn btn-primary">Upload Assignment</button>
+        </a>
+    </div>
+{% endblock %}

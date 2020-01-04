@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <h2 align="center">Sign Up</h2>
+    <br>
+    <div class="container" align="center">
+        <a href="{% url 'teacher_signup' %}">
+            <button class="btn btn-primary">Teacher</button>
+        </a>
+        &nbsp;
+        <a href="{% url 'student_signup' %}">
+            <button class="btn btn-primary">Student</button>
+        </a>
+    </div>
+{% endblock %}

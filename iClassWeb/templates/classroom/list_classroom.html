@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<h1>All Classes Under You</h1>
+<br>
+<div class="row">
+{% for classroom in object_list %}
+    
+        <div class="col-4" style="background-color: e6f1f4">
+            <p>Course: {{ classroom.course }}</p>
+            <p>Room No: {{ classroom.room_no }}</p>
+            <a href="{% url 'classroom:classroom_detail' classroom.code classroom.id %}">
+                <button class="btn btn-primary">Details</button>
+            </a>
+            <br><br><br><br><br>
+        </div>
+{% empty %}
+    <p>No classrooms undertaken by you yet.</p>
+{% endfor %}
+</div>
+
+
+{% endblock %}

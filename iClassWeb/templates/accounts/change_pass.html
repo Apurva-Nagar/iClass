@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+<div class="row d-flex justify-content-center">
+    <div class="col-5">
+        <h2 align="center">Change Password</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-danger">Change Password!</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

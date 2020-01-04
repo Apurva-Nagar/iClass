@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="container">
+        <h2>Profile</h2>
+        <br>
+        {% if user.image %}
+            <img src="{{ user.image.url }}" width="250px" height="250px">
+            <br>
+        {% endif %}
+        <table>
+            <tr>
+                <td><strong>First Name: </strong></td>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Last Name: </strong></td>
+                <td>{{ user.last_name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Username: </strong></td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td><strong>Email: </strong></td>
+                <td>{{ user.email }}</td>
+            </tr>
+        </table>
+        <br>
+        <a href="{% url 'edit_profile' user.id %}">
+            <button class="btn btn-dark">Edit</button>
+        </a>
+        <a href="{% url 'password_change' %}">
+            <button class="btn btn-danger">Change Password</button>
+        </a>
+        <a href="{% url 'delete_account' user.id%}">
+            <button class="btn btn-danger">Delete Account</button>
+        </a>
+    </div>
+{% endblock %}
