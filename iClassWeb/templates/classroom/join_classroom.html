@@ -5,16 +5,20 @@
 {% block body %}
 <div class="row d-flex justify-content-center">
     <div class="col-5">
-        <h2 align="center">Join Classroom</h2>
-        <br>
-        <h3>Course: {{ classroom.course }}</h3>
-        <p>Teacher: {{ classroom.teacher }}</p>
-        <p>Are you sure you want to join this classroom?</p>
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary">Join Classroom</button>
-        </form>
+        <div class="card">
+            <h5 class="card-header">Join Classroom ?</h5>
+            <div class="card-body">
+                <h5 class="card-title">Course: {{ classroom.course }}</h5>
+                <p class="card-text">Teacher: {{ classroom.teacher }}</p>
+                <p class="card-text">Room No: {{ classroom.room_no }}</p>
+                <p class="card-text">Are you sure you want to join this classroom?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Join Classroom</button>
+                </form>
+            </div>
+          </div>
     </div>
 </div>
 {% endblock %}
