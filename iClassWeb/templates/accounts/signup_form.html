@@ -5,7 +5,7 @@
 {% block body %}
 <div class="row d-flex justify-content-center">
     <div class="col-5">
-        <h2 align="center">Sign Up as {{ user_type }}</h2>
+        <h2 align="center">Sign Up as a {{ user_type }}</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}

@@ -34,9 +34,30 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                        </li>
+                        </li> -->
+
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                            Sign Up
+                            <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'teacher_signup' %}">Teacher</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'student_signup' %}">Student</a></li>
+                            </ul>
+                        </li> -->
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Sign Up
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{% url 'teacher_signup' %}">Teacher</a>
+                              <a class="dropdown-item" href="{% url 'student_signup' %}">Student</a>
+                            </div>
+                          </li>
                     {% endif %}
                 </ul>
         </nav>
