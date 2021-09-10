@@ -15,7 +15,7 @@ pipenv==2020.8.13
 pylint==2.6.0
 pytz==2020.4
 six==1.15.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 toml==0.10.1
 virtualenv==20.1.0
 virtualenv-clone==0.5.4
